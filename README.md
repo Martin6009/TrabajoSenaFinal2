@@ -1,4 +1,4 @@
-# Parking Lot Manual ORM
+-# Parking Lot Manual ORM
 
 This folder contains a complete manual Object-Relational Mapping (ORM) implementation for the Parking Lot Management System database. Each table in the database has a corresponding model class with full CRUD operations.
 
@@ -369,4 +369,114 @@ head -10 test/PruebasUsuario.js
 
 ## Additional Testing
 
-See `example-orm-usage.js` in the root directory for comprehensive usage examples and testing scenarios. 
+See `example-orm-usage.js` in the root directory for comprehensive usage examples and testing scenarios.
+
+## API Endpoints - Usuarios
+
+### Obtener todos los usuarios
+- **GET** `/api/usuarios`
+- **Respuesta:**
+```json
+[
+  {
+    "id_usuario": 1,
+    "tipo_documento": "CC",
+    "numero_documento": "123456789",
+    "primer_nombre": "Juan",
+    "segundo_nombre": "Carlos",
+    "primer_apellido": "Pérez",
+    "segundo_apellido": "López",
+    "direccion_correo": "juan@email.com",
+    "numero_celular": "3001234567",
+    "foto_perfil": "foto.jpg",
+    "estado": "activo",
+    "clave": "password123",
+    "perfil_usuario_id": 2
+  }
+]
+```
+
+### Obtener usuario por ID
+- **GET** `/api/usuarios/:id`
+- **Respuesta exitosa:**
+```json
+{
+  "id_usuario": 1,
+  "tipo_documento": "CC",
+  "numero_documento": "123456789",
+  "primer_nombre": "Juan",
+  "segundo_nombre": "Carlos",
+  "primer_apellido": "Pérez",
+  "segundo_apellido": "López",
+  "direccion_correo": "juan@email.com",
+  "numero_celular": "3001234567",
+  "foto_perfil": "foto.jpg",
+  "estado": "activo",
+  "clave": "password123",
+  "perfil_usuario_id": 2
+}
+```
+- **Respuesta si no existe:**
+```json
+{ "error": "Usuario no encontrado" }
+```
+
+### Obtener usuario por número de documento
+- **GET** `/api/usuarios/documento/:numero_documento`
+- **Respuesta exitosa:** igual al formato anterior
+- **Respuesta si no existe:**
+```json
+{ "error": "Usuario no encontrado" }
+```
+
+### Crear usuario
+- **POST** `/api/usuarios`
+- **Body JSON:**
+```json
+{
+  "id_usuario": null,
+  "tipo_documento": "CC",
+  "numero_documento": "123456789",
+  "primer_nombre": "Juan",
+  "segundo_nombre": "Carlos",
+  "primer_apellido": "Pérez",
+  "segundo_apellido": "López",
+  "direccion_correo": "juan@email.com",
+  "numero_celular": "3001234567",
+  "foto_perfil": "foto.jpg",
+  "estado": "activo",
+  "clave": "password123",
+  "perfil_usuario_id": 2
+}
+```
+- **Respuesta exitosa (201):** usuario creado (igual al formato anterior, con el nuevo `id_usuario` asignado)
+- **Respuesta de error:**
+```json
+{ "error": "Mensaje de error" }
+```
+
+### Actualizar usuario
+- **PUT** `/api/usuarios/:id`
+- **Body JSON:** solo los campos a actualizar, por ejemplo:
+```json
+{
+  "primer_nombre": "NuevoNombre",
+  "estado": "inactivo"
+}
+```
+- **Respuesta exitosa:** usuario actualizado (igual al formato anterior)
+- **Respuesta si no existe:**
+```json
+{ "error": "Usuario no encontrado" }
+```
+
+### Eliminar usuario
+- **DELETE** `/api/usuarios/:id`
+- **Respuesta exitosa:**
+```json
+{ "message": "Usuario eliminado correctamente" }
+```
+- **Respuesta si no existe:**
+```json
+{ "error": "Usuario no encontrado" }
+```

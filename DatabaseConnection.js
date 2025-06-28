@@ -5,10 +5,10 @@ class DatabaseConnection {
     // Configuración de la conexión basada en app.js
     this.config = {
       host: 'localhost',
-      port: 8889,
-      user: 'oscar',
-      password: 'Oscar123456',
-      database: 'ParkingLot'
+      port: 3306,
+      user: 'morales',
+      password: 'martin12',
+      database: 'parkinglot',
     };
     
     this.connection = null;
